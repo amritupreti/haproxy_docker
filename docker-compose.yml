@@ -1,0 +1,57 @@
+services:
+  server1:
+    image: server:latest
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8000"
+    environment:
+      - SERVER_NAME=server1
+    container_name: server1
+
+  server2:
+    image: server:latest
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8000"
+    environment:
+      - SERVER_NAME=server2
+    container_name: server2
+
+  server3:
+    image: server:latest
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "8003:8000"
+    environment:
+      - SERVER_NAME=server3
+    container_name: server3
+
+  server4:
+    image: server:latest
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "8004:8000"
+    environment:
+      - SERVER_NAME=server4
+    container_name: server4
+
+  haproxy:
+    image: haproxy:latest
+    ports:
+      - "8000:80"
+    volumes:
+      - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    depends_on:
+      - server1
+      - server2
+      - server3
+      - server4
+    container_name: haproxy
