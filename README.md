@@ -17,7 +17,7 @@ The server contains 4 routes:
 ## What is in the HAProxy?
 HAProxy is configured to:
 - Load balance requests to the FastAPI servers.
-- Restrict access to the `/admin` route, allowing only requests from the HAProxy frontend client.
+- Restrict access to the `/admin` route from frontend clients, can be accessed directly from the servers.
 - Route requests to the `/lightwork` `roundrobin` to the `server1` and `server2` servers.
 - Route requests to the `/heavywork` `source` to the `server3` and `server4` servers.
 - Route requests to the `/` `roundrobin` to all servers.
